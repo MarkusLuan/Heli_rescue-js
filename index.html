@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link media="screen" rel="stylesheet" href="css/index.css" />
+    <script src="js/engine.js"></script>
+</head>
+<body>
+    <div id="conteudo">
+        <div id="main_menu">
+            <h1>Heli Rescue</h1>
+            <input type="button" value="Novo Jogo" onclick="novo_jogo(event)" />
+        </div>
+        
+        <canvas id="canvas" style="display: none"></canvas>
+    </div>
+
+    <script >
+        const canvas_el = document.getElementById("canvas");
+        const main_menu = document.getElementById("main_menu");
+
+        let canvas_obj, w, h;
+
+        function novo_jogo(event) {
+            canvas_el.style.display = "";
+            main_menu.style.display = "none";
+        }
+    </script>
+</body>
+</html>
