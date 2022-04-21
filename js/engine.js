@@ -5,7 +5,7 @@ function init(){
 }
 
 function limparCanvas() {
-    canvas_obj.fillStyle = "#FFF";
+    canvas_obj.fillStyle = "#000";
 
     canvas_obj.fillRect(0, 0, w, h);
 
@@ -14,4 +14,6 @@ function limparCanvas() {
 
 function onUpdate() {
     limparCanvas();
+
+    desenharCenario();
 }
