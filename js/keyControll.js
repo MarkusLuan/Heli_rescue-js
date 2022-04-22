@@ -10,7 +10,7 @@ function onKeyPress(event){
 }
 
 function keysMovimentacao(key) {
-    if (key == "ARROWUP" && player.y > 5){
+    if (key == "ARROWUP" && player.y > 2){
         player.y -= player.velocidade;
     }
     

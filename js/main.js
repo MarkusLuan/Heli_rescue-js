@@ -16,15 +16,53 @@ function moverTiros(){
             var index = tiros.indexOf(tiro);
             tiros.splice(index, 1);
         }
-
-        /*
-        // TODO: Dedectar colisao
-        if (tiroColidir(tiro)){
+        
+        // Dedectar colisao de tiro
+        if (dedectarColisaoTiro(tiro)){
             index = tiros.indexOf(tiro);
             tiros.splice(index, 1);
+
+            canvas_obj.drawImage(img_explosao, tiro.x, tiro.y - 40, 40, 40);
         }
-        */
     }
+}
+
+function dedectarColisaoTiro(tiro){
+    var colidiu = false;
+
+    let inimigo = inimigos.find(inimigo => {
+        var minX = inimigo.x;
+        var maxX = inimigo.x + inimigo.w;
+        var minY = inimigo.y;
+        var maxY = inimigo.y + inimigo.h;
+
+        return tiro.por != inimigo &&
+                (tiro.x >= minX && tiro.x <= maxX) &&
+                (tiro.y >= minY && tiro.y <= maxY);
+    });
+
+    if (inimigo != null){
+        var index = inimigos.indexOf(inimigo);
+        inimigos.splice(index, 1);
+
+        //if (tiro.por == player) pontos += 2;
+        colidiu = true;
+    }
+
+    if (tiro.por != player){
+        var minX = player.x;
+        var maxX = player.x + player.w;
+        var minY = player.y;
+        var maxY = player.y + player.h;
+
+        if ((tiro.x >= minX && tiro.x <= maxX) &&
+            (tiro.y >= minY && tiro.y <= maxY)){
+            //pontos -= 5;
+            colidiu = true;
+        }
+    }
+
+    return colidiu;
 }
 
 function desenharPlayer(player){
@@ -71,7 +109,7 @@ function spawndarInimigo(){
     inimigo.y = y;
     inimigos.push(inimigo);
     
-    let proximoInimigo = parseInt(Math.random() * 360) * 100;
+    let proximoInimigo = 2500 *  parseInt(Math.random() * 10); // parseInt(Math.random() * 360) * 100;
     setTimeout(spawndarInimigo, proximoInimigo);
     console.log(`Proximo inimigo em ${proximoInimigo}`);
 }
