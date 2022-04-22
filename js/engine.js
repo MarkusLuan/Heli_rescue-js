@@ -1,10 +1,13 @@
 function init(){
     tiros = [];
+    inimigos = [];
     player = Helicoptero(10, 10);
 
     canvas_obj = canvas.getContext("2d");
     w = canvas_el.width;
     h = canvas_el.height;
+
+    spawndarInimigo();
 }
 
 function limparCanvas() {
@@ -15,15 +18,12 @@ function limparCanvas() {
     canvas_obj.fillStyle = "#000";
 }
 
-function desenharPlayer(){
-    canvas_obj.drawImage(player.sprite.img, player.sprite.x, player.sprite.y, player.sprite.w, player.sprite.h, player.x, player.y, player.w, player.h);
-    player.sprite.next();
-}
-
 function onUpdate() {
     limparCanvas();
 
     desenharCenario();
-    desenharPlayer();
+    desenharPlayer(player);
+
     moverTiros();
+    moverInimigos();
 }
