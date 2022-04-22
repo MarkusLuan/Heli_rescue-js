@@ -1,4 +1,5 @@
 function init(){
+    tiros = [];
     player = Helicoptero(10, 10);
 
     canvas_obj = canvas.getContext("2d");
@@ -24,4 +25,5 @@ function onUpdate() {
 
     desenharCenario();
     desenharPlayer();
+    moverTiros();
 }

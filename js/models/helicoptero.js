@@ -11,4 +11,4 @@ const Helicoptero = (x, y) => {
         "velocidade": velocidade,
         "sprite": Sprite("helicopter.png", 10, 0, 96, 32, 7)
     };
-}
+};

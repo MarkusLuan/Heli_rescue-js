@@ -10,19 +10,23 @@ function onKeyPress(event){
 }
 
 function keysMovimentacao(key) {
-    if (key == "ARROWUP"){
+    if (key == "ARROWUP" && player.y > 5){
         player.y -= player.velocidade;
     }
     
-    if (key == "ARROWLEFT"){
+    if (key == "ARROWLEFT" && player.x > 5){
         player.x -= player.velocidade;
     }
 
-    if (key == "ARROWRIGHT"){
+    if (key == "ARROWRIGHT" && (player.x + player.w) < (w + 5)){
         player.x += player.velocidade;
     }
 
-    if (key == "ARROWDOWN"){
+    if (key == "ARROWDOWN" && (player.y + player.h) < (h - 5)){
         player.y += player.velocidade;
+    }
+
+    if (key == "SPACE"){
+        tiros.push(Tiro(player, "#0000FF"));
     }
 }

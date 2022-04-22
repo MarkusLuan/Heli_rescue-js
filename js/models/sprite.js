@@ -34,4 +34,4 @@ const Sprite = (img, x, y, w, h, quant) => {
     };
 
     return sprite;
-}
+};
