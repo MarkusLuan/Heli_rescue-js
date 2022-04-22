@@ -1,7 +1,7 @@
 const Helicoptero = (x, y) => {
     const w = 80;
     const h = 26;
-    const velocidade = 1;
+    const velocidade = 2;
 
     return {
         "x": x,
