@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link media="screen" rel="stylesheet" href="css/index.css" />
+    <script src="js/models/helicoptero.js"></script>
+    <script src="js/models/sprite.js"></script>
     <script src="js/assets.js"></script>
     <script src="js/cenario.js"></script>
     <script src="js/engine.js"></script>
@@ -25,6 +27,7 @@
 
         let canvas_obj, w, h;
         let updateInterval;
+        let player;
 
         function novo_jogo(event) {
             canvas_el.style.display = "";
@@ -36,6 +39,8 @@
             }
             updateInterval = setInterval(onUpdate, 50);
         }
+
+        novo_jogo();
     </script>
 </body>
 </html>

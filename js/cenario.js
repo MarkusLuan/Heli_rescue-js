@@ -20,7 +20,7 @@ function desenharRua(){
 function desenharCeu(){
     canvas_obj.drawImage(img_nuvem, (w + (posCenario * 0.8)), 10, 50, 50);
 
-    canvas_obj.drawImage(img_nuvem, (w + (posCenario * 0.5) + 50), 50, 50, 50);
+    canvas_obj.drawImage(img_nuvem, (w + (posCenario * 0.5) + 50), 60, 50, 50);
 }
 
 function desenharArvore(){
@@ -37,8 +37,8 @@ function desenharArvore(){
 function desenharCenario(){
     canvas_obj.drawImage(img_montains, 0, 0, w, h);
     
-    desenharArvore();
     desenharCeu();
+    desenharArvore();
     desenharRua();
 
     posCenario -= velocidade;
