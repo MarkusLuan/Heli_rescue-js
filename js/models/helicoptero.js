@@ -1,7 +1,9 @@
-const Helicoptero = (x, y) => {
+const Helicoptero = (x, y, isInimigo) => {
     const w = 80;
     const h = 26;
     const velocidade = 2;
+
+    const img = isInimigo ? "helicopter_inimigo.png": "helicopter.png";
 
     return {
         "x": x,
@@ -10,7 +12,7 @@ const Helicoptero = (x, y) => {
         "h": h,
         "direcao": 1,
         "velocidade": velocidade,
-        "sprite": Sprite("helicopter.png", 10, 0, 96, 32, 7),
+        "sprite": Sprite(img, 0, 0, 96, 32, 7),
         "tipo": "HELICOPTERO"
     };
 };

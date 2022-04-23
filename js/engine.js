@@ -1,7 +1,7 @@
 function init(){
     tiros = [];
     inimigos = [];
-    player = Helicoptero(10, 10);
+    player = Helicoptero(10, 10, false);
 
     canvas_obj = canvas.getContext("2d");
     w = canvas_el.width;

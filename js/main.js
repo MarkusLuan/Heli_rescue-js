@@ -17,28 +17,48 @@ function moverTiros(){
             tiros.splice(index, 1);
         }
         
-        // Dedectar colisao de tiro
-        if (dedectarColisaoTiro(tiro)){
-            index = tiros.indexOf(tiro);
-            tiros.splice(index, 1);
-
-            canvas_obj.drawImage(img_explosao, tiro.x, tiro.y - 40, 40, 40);
-        }
+        dedectarColisaoTiro(tiro);
     }
+}
+
+function isColidiu(obj1, obj2){
+    const deburarColisao = false;
+    if (deburarColisao){
+        canvas_obj.strokeStyle = "#FF0000";
+        canvas_obj.strokeRect(obj1.x, obj1.y, 5, 5);
+        canvas_obj.strokeRect(obj1.x, (obj1.y + obj1.h), 5, 5);
+        canvas_obj.strokeRect((obj1.x + obj1.w), obj1.y, 5, 5);
+        canvas_obj.strokeRect((obj1.x + obj1.w), (obj1.y + obj1.h), 5, 5);
+
+        canvas_obj.strokeRect(obj2.x, obj2.y, 5, 5);
+        canvas_obj.strokeRect(obj2.x, (obj2.y + obj2.h), 5, 5);
+        canvas_obj.strokeRect((obj2.x + obj2.w), obj2.y, 5, 5);
+        canvas_obj.strokeRect((obj2.x + obj2.w), (obj2.y + obj2.h), 5, 5);
+    }
+
+    // Se o ponto da esquerda do obj1 cruza com o obj2
+    let colidiuX = (obj1.x >= obj2.x) && obj1.x <= (obj2.x + obj2.w)
+        || (obj2.x >= obj1.x) && obj2.x <= (obj1.x + obj1.w); // Se o ponto da direita do obj1 cruza com o obj2
+
+    // Se o ponto de cima do obj1 cruza com o obj2
+    let colidiuY = (obj1.y >= obj2.y) && obj1.y <= (obj2.y + obj2.h)
+        || (obj2.y >= obj1.y) && obj2.y <= (obj1.y + obj1.h); // Se o ponto de baixo do obj1 cruza com o obj2
+
+    return colidiuX && colidiuY;
+}
+
+function dedectarColisaoJogador(objeto){
+    let colidiu = isColidiu(objeto, player);
+
+    return colidiu;
 }
 
 function dedectarColisaoTiro(tiro){
     var colidiu = false;
 
     let inimigo = inimigos.find(inimigo => {
-        var minX = inimigo.x;
-        var maxX = inimigo.x + inimigo.w;
-        var minY = inimigo.y;
-        var maxY = inimigo.y + inimigo.h;
-
         return tiro.por != inimigo &&
-                (tiro.x >= minX && tiro.x <= maxX) &&
-                (tiro.y >= minY && tiro.y <= maxY);
+            isColidiu(tiro, inimigo);
     });
 
     if (inimigo != null){
@@ -49,17 +69,13 @@ function dedectarColisaoTiro(tiro){
         colidiu = true;
     }
 
-    if (tiro.por != player){
-        var minX = player.x;
-        var maxX = player.x + player.w;
-        var minY = player.y;
-        var maxY = player.y + player.h;
+    if (tiro.por != player) colidiu = dedectarColisaoJogador(tiro);
 
-        if ((tiro.x >= minX && tiro.x <= maxX) &&
-            (tiro.y >= minY && tiro.y <= maxY)){
-            //pontos -= 5;
-            colidiu = true;
-        }
+    if (colidiu) {
+        index = tiros.indexOf(tiro);
+        tiros.splice(index, 1);
+
+        canvas_obj.drawImage(img_explosao, tiro.x, tiro.y - 40, 40, 40);
     }
 
     return colidiu;
@@ -88,7 +104,7 @@ function spawndarInimigo(){
     let inimigo;
 
     if (y < (h-65)) {
-        inimigo = Helicoptero();
+        inimigo = Helicoptero(0, 0, true);
         inimigo.direcao = -1;
         inimigo.velocidade = -0.2;
     }
@@ -98,7 +114,7 @@ function spawndarInimigo(){
         inimigo.velocidade = -0.5;
     }
 
-    // Ajustar
+    // Ajustar posição inimigo
     if ((y + inimigo.h) > h){
         console.log("Ajustar posição inimigo: ", inimigo.y);
         y -= inimigo.h;
@@ -130,10 +146,17 @@ function moverInimigos(){
 
         desenharPlayer(inimigo);
 
-        //Remover o tiro da memória caso já tenha saido da tela
-        if (inimigo.x <= 0){
+        //Remover o inimigo da memória caso já tenha saido da tela
+        if ((inimigo.x + inimigo.w) <= 0){
             var index = inimigos.indexOf(inimigo);
             inimigos.splice(index, 1);
+        }
+
+        if (dedectarColisaoJogador(inimigo)) {
+            var index = inimigos.indexOf(inimigo);
+            inimigos.splice(index, 1);
+
+            canvas_obj.drawImage(img_explosao, inimigo.x, inimigo.y, 40, 40);
         }
     }
 }

@@ -1,6 +1,6 @@
 let posCenario = 0;
 let velocidadeCenario = 2;
-const velocidadeCenarioMaxima = 200;
+const velocidadeCenarioMaxima = 40;
 
 function desenharRua(){
     canvas_obj.fillStyle = "#555";
