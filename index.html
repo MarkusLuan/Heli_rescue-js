@@ -23,6 +23,10 @@
     <div id="conteudo">
         <div id="main_menu">
             <h1>Heli Rescue</h1>
+            <div id="game_over" style="display: none;">
+                <h2>GAME OVER</h2>
+                <h3 id="placar_game_over" style="text-align: center;"></h3>
+            </div>
             <input type="button" value="Novo Jogo" onclick="novo_jogo(event)" />
         </div>
         
@@ -33,6 +37,7 @@
     <script >
         const canvas_el = document.getElementById("canvas");
         const main_menu = document.getElementById("main_menu");
+        const game_over = document.getElementById("game_over");
 
         let canvas_obj, w, h;
         let updateInterval;
@@ -45,13 +50,9 @@
             main_menu.style.display = "none";
 
             init();
-            if (updateInterval){
-                clearInterval(updateInterval);
-            }
-            updateInterval = setInterval(onUpdate, 60);
-
-            addEventListener("keydown", onKeyPress);
         }
+
+        addEventListener("keydown", onKeyPress);
     </script>
 </body>
 </html>

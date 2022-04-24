@@ -1,8 +1,6 @@
 function init(){
-    tiros = [];
-    inimigos = [];
-    player = Helicoptero(10, 10, false);
-
+    reset();
+    
     canvas_obj = canvas.getContext("2d");
     w = canvas_el.width;
     h = canvas_el.height;
@@ -30,4 +28,32 @@ function onUpdate() {
     moverInimigos();
 
     updatePlacar();
+}
+
+function reset(){
+    pontos = 0;
+    resgates = 0;
+
+    tiros = [];
+    inimigos = [];
+    player = Helicoptero(10, 10, false);
+
+    if (updateInterval){
+        clearInterval(updateInterval);
+    }
+    updateInterval = setInterval(onUpdate, 60);
+
+    posCenario = 0;
+    velocidadeCenario = 2;
+}
+
+function gameOver() {
+    audio_bg.pause();
+    audio_bg.currentTime = 0;
+
+    clearInterval(updateInterval);
+
+    main_menu.style.display = "";
+    game_over.style.display = "";
+    canvas.style.display = "none";
 }

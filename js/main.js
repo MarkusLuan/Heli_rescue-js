@@ -80,6 +80,7 @@ function dedectarColisaoTiro(tiro){
         }
         else {
             explodir(player);
+            gameOver();
         }
     }
 
@@ -169,6 +170,7 @@ function moverInimigos(){
             inimigos.splice(index, 1);
 
             explodir(inimigo);
+            gameOver();
         }
     }
 }
