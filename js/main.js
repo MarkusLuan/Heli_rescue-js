@@ -75,7 +75,8 @@ function dedectarColisaoTiro(tiro){
         index = tiros.indexOf(tiro);
         tiros.splice(index, 1);
 
-        canvas_obj.drawImage(img_explosao, tiro.x, tiro.y - 40, 40, 40);
+        if (inimigo != null) explodir(inimigo);
+        else explodir(player);
     }
 
     return colidiu;
@@ -130,6 +131,13 @@ function spawndarInimigo(){
     console.log(`Proximo inimigo em ${proximoInimigo}`);
 }
 
+function explodir(objeto){
+    let audio = new Audio(audio_explosao.src);
+    audio.play();
+
+    canvas_obj.drawImage(img_explosao, objeto.x, objeto.y, objeto.w, objeto.h);
+}
+
 function moverInimigos(){
     //Desenha cada tiro no canvas
     for (var inimigo of inimigos){
@@ -156,7 +164,7 @@ function moverInimigos(){
             var index = inimigos.indexOf(inimigo);
             inimigos.splice(index, 1);
 
-            canvas_obj.drawImage(img_explosao, inimigo.x, inimigo.y, 40, 40);
+            explodir(inimigo);
         }
     }
 }

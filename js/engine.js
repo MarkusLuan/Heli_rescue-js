@@ -8,6 +8,8 @@ function init(){
     h = canvas_el.height;
 
     spawndarInimigo();
+
+    audio_bg.play();
 }
 
 function limparCanvas() {

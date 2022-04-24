@@ -14,15 +14,15 @@ function keysMovimentacao(key) {
         player.y -= player.velocidade;
     }
     
-    if (key == "ARROWLEFT" && player.x > 5){
+    if (key == "ARROWLEFT" && player.x > 2){
         player.x -= player.velocidade;
     }
 
-    if (key == "ARROWRIGHT" && (player.x + player.w) < (w + 5)){
+    if (key == "ARROWRIGHT" && (player.x + player.w) < (w + 2)){
         player.x += player.velocidade;
     }
 
-    if (key == "ARROWDOWN" && (player.y + player.h) < (h - 5)){
+    if (key == "ARROWDOWN" && (player.y + player.h) < (h - 2)){
         player.y += player.velocidade;
     }
 

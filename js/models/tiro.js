@@ -11,6 +11,10 @@ const Tiro = (_por, cor) => {
         direcao *= -1;
     }
 
+    let audio = new Audio(audio_tiro.src);
+    audio.onplay = audio_tiro.onplay;
+    audio.play();
+
     return {
         "x": x,
         "y": y,
