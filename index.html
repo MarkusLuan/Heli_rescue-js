@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link media="screen" rel="stylesheet" href="css/index.css" />
     
+    <script src="js/models/prisioneiro.js"></script>
     <script src="js/models/tiro.js"></script>
     <script src="js/models/carro.js"></script>
     <script src="js/models/helicoptero.js"></script>
@@ -44,6 +45,7 @@
         let player;
         let tiros;
         let inimigos;
+        let prisioneiro = null;
 
         function novo_jogo(event) {
             canvas_el.style.display = "";

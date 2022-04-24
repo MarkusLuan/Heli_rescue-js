@@ -5,3 +5,7 @@ arvore - https://opengameart.org/content/autumn-tree-1
 mountains - https://opengameart.org/content/mountain-background
 
 helicopter - https://opengameart.org/content/helicopter-2
+
+carro - DIO
+
+prisioneiro - https://opengameart.org/content/hero-0

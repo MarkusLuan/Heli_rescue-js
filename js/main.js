@@ -54,7 +54,7 @@ function dedectarColisaoJogador(objeto){
 }
 
 function dedectarColisaoTiro(tiro){
-    var colidiu = false;
+    let colidiu = false;
 
     let inimigo = inimigos.find(inimigo => {
         return tiro.por != inimigo &&
@@ -65,42 +65,48 @@ function dedectarColisaoTiro(tiro){
         var index = inimigos.indexOf(inimigo);
         inimigos.splice(index, 1);
 
+        if (tiro.por == player) pontos += 5;
+        explodir(inimigo);
+
         colidiu = true;
     }
 
-    if (tiro.por != player) colidiu = dedectarColisaoJogador(tiro);
+    if (tiro.por != player && dedectarColisaoJogador(tiro)) {
+        explodir(player);
+        gameOver();
+
+        colidiu = true;
+    }
+
+    if (prisioneiro && isColidiu(tiro, prisioneiro)) {
+        prisioneiro = null;
+        if (tiro.por == player) pontos -= 10;
+        
+        colidiu = true;
+    }
 
     if (colidiu) {
         index = tiros.indexOf(tiro);
         tiros.splice(index, 1);
-
-        if (inimigo != null) {
-            pontos += 5;
-            explodir(inimigo);
-        }
-        else {
-            explodir(player);
-            gameOver();
-        }
     }
 
     return colidiu;
 }
 
-function desenharPlayer(player){
-    let x = player.x;
+function desenharSprite(objeto){
+    let x = objeto.x;
 
     canvas_obj.save();
-    if (player.direcao < 0){
+    if (objeto.direcao < 0){
         canvas_obj.translate(w, 0);
         canvas_obj.scale(-1, 1);
-        x = w - (x + player.w);
+        x = w - (x + objeto.w);
     }
 
-    canvas_obj.drawImage(player.sprite.img, player.sprite.x, player.sprite.y, player.sprite.w, player.sprite.h, x, player.y, player.w, player.h);
+    canvas_obj.drawImage(objeto.sprite.img, objeto.sprite.x, objeto.sprite.y, objeto.sprite.w, objeto.sprite.h, x, objeto.y, objeto.w, objeto.h);
     canvas_obj.restore();
 
-    player.sprite.next();
+    objeto.sprite.next();
 }
 
 function spawndarInimigo(){
@@ -157,7 +163,7 @@ function moverInimigos(){
             }
         }
 
-        desenharPlayer(inimigo);
+        desenharSprite(inimigo);
 
         //Remover o inimigo da memória caso já tenha saido da tela
         if ((inimigo.x + inimigo.w) <= 0){
@@ -172,5 +178,36 @@ function moverInimigos(){
             explodir(inimigo);
             gameOver();
         }
+
+        if (prisioneiro && isColidiu(inimigo, prisioneiro) && (prisioneiro.y >= (inimigo.y - 10) && prisioneiro.y <= (inimigo.y + 10))) {
+            prisioneiro = null;
+        }
+    }
+}
+
+function spawndarPrisioneiro(){
+    let x = -20;
+    let y = h - parseInt(Math.random() * 40);
+
+    prisioneiro = Prisioneiro(x, y);
+    prisioneiro.y -= prisioneiro.h;
+}
+
+function moverPrisioneiro() {
+    if (prisioneiro == null) return;
+    
+    prisioneiro.x += prisioneiro.velocidade;
+    desenharSprite(prisioneiro);
+
+    if (isColidiu(prisioneiro, player)) {
+        pontos += 10;
+        resgates += 1;
+        prisioneiro = null;
+        return;
+    };
+
+    if (prisioneiro.x + prisioneiro.w >= w) {
+        prisioneiro = null;
+        return;
     }
 }

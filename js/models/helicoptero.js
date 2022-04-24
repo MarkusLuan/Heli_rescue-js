@@ -12,7 +12,7 @@ const Helicoptero = (x, y, isInimigo) => {
         "h": h,
         "direcao": 1,
         "velocidade": velocidade,
-        "sprite": Sprite(img, 0, 0, 96, 32, 7),
+        "sprite": Sprite(img, 0, 0, 96, 32, 8),
         "tipo": "HELICOPTERO"
     };
 };

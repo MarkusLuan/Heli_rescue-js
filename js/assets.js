@@ -18,9 +18,7 @@ audio_bg.volume = 0.8;
 
 const audio_tiro = new Audio("assets/audio/tiro.mp3");
 audio_tiro.onplay = function() {
-    console.log("on play");
     setTimeout(() => {
-        console.log("fim on play");
         this.pause();
         this.currentTime = 0;
     }, 1000);

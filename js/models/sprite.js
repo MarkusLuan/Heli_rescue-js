@@ -13,24 +13,28 @@ const Sprite = (img, x, y, w, h, quant) => {
         "img": imgEl
     };
 
-    sprite.setAtual = (a) => {
-        if (a > 0 &&  a <= quant) {
-            atual = a;
+    const changeSprite = () => {
+        sprite.x = x + (w * atual) - w;
+    };
 
-            sprite.x = x + (w * atual) - w;
+    sprite.setAtual = (a) => {
+        if (a > 0 && a <= quant) {
+            atual = a;
         }
-    }
+
+        changeSprite();
+    };
 
     sprite.next = () => {
-        if (atual > quant || quant == 1) atual = 1;
+        if (atual >= quant || quant == 1) atual = 1;
         else atual += 1;
 
-        sprite.x = x + (w * atual) - w;
+        sprite.setAtual(atual);
     };
 
     sprite.refresh = () => {
         atual = 1;
-        sprite.x = x + (w * atual) - w;
+        sprite.setAtual(atual);
     };
 
     return sprite;

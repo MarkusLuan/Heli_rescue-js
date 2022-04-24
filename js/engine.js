@@ -22,10 +22,16 @@ function onUpdate() {
     limparCanvas();
 
     desenharCenario();
-    desenharPlayer(player);
+    desenharSprite(player);
 
     moverTiros();
     moverInimigos();
+
+    if (prisioneiro == null){
+        let spwanRandomico = parseInt(Math.random() * 300);
+        if (spwanRandomico == 1) spawndarPrisioneiro();
+    }
+    moverPrisioneiro();
 
     updatePlacar();
 }
@@ -33,6 +39,7 @@ function onUpdate() {
 function reset(){
     pontos = 0;
     resgates = 0;
+    prisioneiro = null;
 
     tiros = [];
     inimigos = [];
