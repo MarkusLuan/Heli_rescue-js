@@ -28,4 +28,6 @@ function onUpdate() {
 
     moverTiros();
     moverInimigos();
+
+    updatePlacar();
 }

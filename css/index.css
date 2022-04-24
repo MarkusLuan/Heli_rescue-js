@@ -28,6 +28,16 @@ body {
     cursor: pointer;
 }
 
+#placar {
+    position: absolute;
+    margin-left: 20px;
+    margin-top: 20px;
+    font-size: 19pt;
+    background: rgb(0 0 0 / 25%);
+    color: #FFF;
+    padding: 10px;
+}
+
 #canvas {
     border: 1px solid gray;
     width: 100%;

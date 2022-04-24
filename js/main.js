@@ -65,7 +65,6 @@ function dedectarColisaoTiro(tiro){
         var index = inimigos.indexOf(inimigo);
         inimigos.splice(index, 1);
 
-        //if (tiro.por == player) pontos += 2;
         colidiu = true;
     }
 
@@ -75,8 +74,13 @@ function dedectarColisaoTiro(tiro){
         index = tiros.indexOf(tiro);
         tiros.splice(index, 1);
 
-        if (inimigo != null) explodir(inimigo);
-        else explodir(player);
+        if (inimigo != null) {
+            pontos += 5;
+            explodir(inimigo);
+        }
+        else {
+            explodir(player);
+        }
     }
 
     return colidiu;
